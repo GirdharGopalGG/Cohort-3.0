@@ -1,0 +1,41 @@
+<head>
+    <style>
+    
+       .todo-item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+       }
+
+    </style>
+</head>
+<body style="display: grid;place-content: center;background-color: #313131;color: white;">
+    <div>
+        <h1><u>To-do LisT</u></h1>
+        <div id="todo-1" class="todo-item">
+            <h2>1. mai hu khalnayak</h2>
+            <button onclick="deleteTodo(1)">🗑️</button>
+        </div>
+        <div id="todo-2" class="todo-item">
+            <h2>2. mai hu nalayak</h2>
+            <button onclick="deleteTodo(2)">🗑️</button>
+        </div>
+        <div id="todo-3" class="todo-item">
+            <h2>3. kuch kaam krle nalle</h2>
+            <button onclick="deleteTodo(3)">🗑️</button>
+        </div>  
+
+    </div>
+
+    
+    <script>
+        
+        function deleteTodo(id){
+            const element = document.getElementById(`todo-${id}`)
+            element.parentNode.removeChild(element)
+        }
+
+        
+
+    </script>
+</body>

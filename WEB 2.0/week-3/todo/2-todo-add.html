@@ -1,0 +1,89 @@
+<head></head>
+    <style>
+    
+       .todo-item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+       }
+
+       .bhawra{
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: xx-small;
+       }
+
+       
+
+    </style>
+</head>
+<body style="display: grid;place-content: center;background-color: #313131;color: white;">
+    
+    <div id="todos">
+        <h1><u>To-do LisT</u></h1>
+        <div>
+            <input type="text" placeholder="Enter here..." id="input">
+            <button onclick="addTodo()">➕</button>
+        </div>
+        <div id="todo-1" class="todo-item">
+            <h2>1. mai hu khalnayak</h2>
+            <button onclick="deleteTodo(1)">🗑️</button>
+        </div>
+        <div id="todo-2" class="todo-item">
+            <h2>2. mai hu nalayak</h2>
+            <button onclick="deleteTodo(2)">🗑️</button>
+        </div>
+        <div id="todo-3" class="todo-item">
+            <h2>3. kuch kaam krle nalle</h2>
+            <button onclick="deleteTodo(3)">🗑️</button>
+        </div>  
+        
+        
+
+    </div>
+
+    
+    <script>
+        
+        let count = 4
+        
+        function deleteTodo(id){
+            const element = document.getElementById(`todo-${id}`)
+            element.parentNode.removeChild(element)
+        }
+
+        function addTodo(){
+            const div = document.createElement('div')
+            const input = document.getElementById('input').value
+
+            if(input===``){
+                alert('Abe chut!ye dimaag INPUT BOX ki trah khali h kya')
+                return
+            }
+            div.setAttribute('id',`todo-${count}`)
+            div.setAttribute('class',`todo-item`)
+
+            //USING PROPERTY ASSIGNMENT
+            // div.id = `todo-${count}`
+            // div.classList.add('todo-item','bhawra')
+            
+
+            const h2 = document.createElement('h2')
+            h2.textContent = `${count}. ${input}`
+
+            const delButton = document.createElement('button')
+            delButton.textContent = `🗑️`
+            delButton.setAttribute('onclick',`deleteTodo(${count})`)
+
+            div.appendChild(h2)
+            div.appendChild(delButton)
+
+
+            const todos = document.getElementById('todos')
+            todos.appendChild(div)
+            count++
+            
+        }
+        
+
+    </script>
+</body>
