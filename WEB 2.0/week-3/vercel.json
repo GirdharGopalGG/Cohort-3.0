@@ -4,5 +4,8 @@
         "source": "/(.*)",
         "destination": "/advanced-render-todo.html"
       }
-    ]
+    ],
+    "projectSettings": {
+      "rootDirectory": "todo-rendering"  
+    }
   }
