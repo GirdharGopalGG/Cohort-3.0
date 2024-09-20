@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "/week-3/todo-rendering/advanced-render-todo.html"
+        "destination": "/advanced-render-todo.html"
       }
     ]
   }

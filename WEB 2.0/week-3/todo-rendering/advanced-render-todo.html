@@ -30,11 +30,16 @@
     const input = document.getElementById('input')
 
     function addTodo(){
+        if(input.value===''){
+            alert('Enter your task 📝')
+            return
+        }
         todos.push({
             title: input.value
         })
-        input.value = ""
+        input.value = ''
         render()
+        
     }
 
     function deleteTodo(id){
@@ -59,7 +64,7 @@
         delButton.innerHTML = '🗑️'
         delButton.setAttribute('onclick',`deleteTodo(${index})`)
         
-        h2.innerHTML = `${index+1}. ${input.value}` //index+1 is just a syntactical sugar, in the backend its 0-indexing only
+        h2.innerHTML = `${index+1}. ${todo.title}` //index+1 is just a syntactical sugar, in the backend its 0-indexing only
 
         div.appendChild(h2)
         div.appendChild(delButton)
