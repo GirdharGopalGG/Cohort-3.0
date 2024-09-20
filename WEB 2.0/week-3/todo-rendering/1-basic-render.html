@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .flex{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #313131; color:white;display: grid;place-content: center; height: 100vh;">
+    <h1>Todo LisT</h1>
+    <div style="display: flex;align-items: center; justify-content: space-between; ">
+        <div><input type="text" placeholder="Enter here..." id = "input"></div>
+        <div><button id="add" onclick="addTodo()">➕</button></div>
+    </div>
+    <div id="root"></div>
+    
+    
+
+<script>
+
+    let todos = []
+    let count = 1
+    const input = document.getElementById('input')
+
+    function addTodo(){
+        todos.push({
+            id: count,
+            title: input.value
+        })
+        count++
+        input.value= ""
+        render()
+        
+    }
+
+    function deleteTodo(id){
+    todos = todos.filter(todo => todo.id != id); // return the filtered array
+    render();
+}
+  
+
+    function render(){
+        const todoList = document.getElementById('root')
+        todoList.innerHTML=""
+
+        todos.forEach(todo => {
+            const div = document.createElement('div')
+            const h2 = document.createElement('h2')
+            const delButton = document.createElement('button')
+
+            delButton.innerText = '🗑️'
+            delButton.setAttribute('onclick',`deleteTodo(${todo.id})`)
+
+            h2.textContent = `${todo.id}. ${todo.title}`
+            div.appendChild(h2)
+            div.appendChild(delButton)
+            div.setAttribute('id',`${todo.id}`)
+            div.setAttribute('class','flex')
+
+            todoList.appendChild(div)
+            
+
+        });
+    }
+    
+    
+
+</script>
+</body>
+</html>

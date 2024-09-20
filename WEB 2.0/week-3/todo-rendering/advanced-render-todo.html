@@ -1,0 +1,78 @@
+<!-- ADVANCED RENDER WITHOUT USING COUNT VARIABLE -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .flex{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doit-todoit</title>
+</head>
+<body style="background-color: #313131; color:white;display: grid;place-content: center; height: 100vh;">
+    <h1>Todo LisT</h1>
+    <div style="display: flex;align-items: center; justify-content: space-between; ">
+        <input type="text" placeholder="Enter here..." id = "input">
+        <button id="add" onclick="addTodo()">➕</button>
+    </div>
+    <div id="root"></div>
+    
+
+
+<script>
+
+    let todos = []
+    const input = document.getElementById('input')
+
+    function addTodo(){
+        todos.push({
+            title: input.value
+        })
+        input.value = ""
+        render()
+    }
+
+    function deleteTodo(id){
+
+        todos.splice(id,1)
+        render()
+
+    }
+
+    function render(){
+        const todoList = document.getElementById('root')
+        todoList.innerHTML = ""
+
+        todos.forEach((todo,index)=>{
+        const div = document.createElement('div')
+        const h2 = document.createElement('h2')
+        const delButton = document.createElement('button')
+      
+        div.setAttribute('id',`${index}`)
+        div.setAttribute('class','flex')
+
+        delButton.innerHTML = '🗑️'
+        delButton.setAttribute('onclick',`deleteTodo(${index})`)
+        
+        h2.innerHTML = `${index+1}. ${input.value}` //index+1 is just a syntactical sugar, in the backend its 0-indexing only
+
+        div.appendChild(h2)
+        div.appendChild(delButton)
+
+        todoList.appendChild(div)
+        
+        })
+
+        
+
+    }
+
+</script>
+
+</body>
+</html>

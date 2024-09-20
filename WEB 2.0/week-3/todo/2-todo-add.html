@@ -53,9 +53,9 @@
 
         function addTodo(){
             const div = document.createElement('div')
-            const input = document.getElementById('input').value
+            const input = document.getElementById('input')
 
-            if(input===``){
+            if(input.value===``){
                 alert('Abe chut!ye dimaag INPUT BOX ki trah khali h kya')
                 return
             }
@@ -68,7 +68,7 @@
             
 
             const h2 = document.createElement('h2')
-            h2.textContent = `${count}. ${input}`
+            h2.textContent = `${count}. ${input.value}`
 
             const delButton = document.createElement('button')
             delButton.textContent = `🗑️`
@@ -81,7 +81,10 @@
             const todos = document.getElementById('todos')
             todos.appendChild(div)
             count++
-            
+
+            input.value= ""
+
+            //cannot clear input field if .value is already added in the initially while taking the input
         }
         
 
