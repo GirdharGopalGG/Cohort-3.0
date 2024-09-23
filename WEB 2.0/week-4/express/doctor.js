@@ -42,6 +42,7 @@ app.post('/',(req,res)=>{
     console.log(req.body)
     
     if(isHealthy===true){
+        if(users[0].kidneys.length < 2){
         users[0].kidneys.push({
             healthy:isHealthy
         })
@@ -49,15 +50,59 @@ app.post('/',(req,res)=>{
             msg:'kidney Added'
         })
     }
+}
+else{
+    res.json({
+        msg:"provide a good kidney or check whether already 2 kidneys exist"
+    })
+}
         
 })
 
 app.put('/',(req,res)=>{
+    users.forEach(user=>{
+        user.kidneys.map(kidney=>{
+            kidney.healthy = true
+        })
+    })
 
-})
+    res.json({
+        msg:'kidneys fixed',
+        users: users
+        })
+    })
+
 
 app.delete('/',(req,res)=>{
+    let unhealthyKidney = 0
+    users.forEach(user=>{
+        user.kidneys.forEach(kidney=>{
+            if(kidney.healthy===false){
+                unhealthyKidney++
+                user.kidneys = user.kidneys.filter(kidney=>{
+          
+                    return kidney.healthy === true
+                })
+            }
+        })
+        
+        
+            
+        
+    })
+    if(unhealthyKidney===0){
+        res.json({
+            msg:"there are no unhealthy kidneys"
 
+        })
+    }else{
+        res.json({
+            msg:"removed unhealthy kidneys"
+        })
+    }
+   
+
+    
 })
 
 app.listen(3000)

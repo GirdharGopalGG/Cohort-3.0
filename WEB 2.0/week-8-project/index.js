@@ -5,15 +5,18 @@ const { adminRouter } = require('./admin')
 
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://greatgmang:93XMVP6TPkGDixzm@cluster0.ajhckxw.mongodb.net/week-8-courseProject')
-console.log("conneted to")
 
 const app = express()
+app.use(express.json())
 
 app.use('/user',userRouter)
 app.use('/course',courseRouter)
 app.use('/admin',adminRouter)
 
+async function main() {
+    await mongoose.connect('mongodb+srv://greatgmang:93XMVP6TPkGDixzm@cluster0.ajhckxw.mongodb.net/hojaaaaabc')
+    app.listen(3000);
+    console.log("listening on port 3000")
+}
 
-
-app.listen(3000)
+main()
