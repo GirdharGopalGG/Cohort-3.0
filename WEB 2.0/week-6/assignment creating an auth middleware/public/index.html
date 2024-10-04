@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      full stack app- connecting be to fe and eliminating the need of postmaan
+      to send http req
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+  </head>
+  <body>
+    <label for="username">username</label>
+    <input type="text" name="username" id="username" placeholder="username" />
+
+    <label for="password">password</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="password"
+    />
+
+    <button onclick="signup()">signup</button>
+    <button onclick="signin()">signin</button>
+
+    <div>
+      USER-INFO:
+      <div id="user"></div>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+      async function signup() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const response = await axios.post("http://localhost:3000/signup", {
+          username: username,
+          password: password,
+        });
+        console.log(response.data);
+      }
+
+      async function signin() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const response = await axios.post("http://localhost:3000/signin", {
+          username: username,
+          password: password,
+        });
+
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token);
+
+        getUserInfo();
+      }
+
+      async function getUserInfo() {
+        const response = await axios.get("http://localhost:3000/me", {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        });
+        document.getElementById(
+          "user"
+        ).innerHTML = ` Username: ${response.data.username} || Password: ${response.data.password}`;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        document.getElementById("user").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

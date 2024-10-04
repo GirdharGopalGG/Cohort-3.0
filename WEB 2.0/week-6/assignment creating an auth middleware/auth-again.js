@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const cors = require("cors");
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
@@ -25,6 +25,10 @@ function authMiddleware(req, res, next) {
     return;
   }
 }
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 app.post("/signup", (req, res) => {
   const username = req.body.username;
@@ -70,6 +74,7 @@ app.post("/signin", (req, res) => {
     res.status(401).json({
       msg: "username or password incorrect",
     });
+    return;
   }
 });
 
