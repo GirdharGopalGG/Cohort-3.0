@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
-// const JWT_SECRET = "kamla";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(express.json());
