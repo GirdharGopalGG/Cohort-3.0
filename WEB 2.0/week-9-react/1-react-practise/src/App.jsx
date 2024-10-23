@@ -4,11 +4,11 @@ function App() {
   //{{CONDITIONAL RENDERING}}
   const [counterVisible, setCounterVisible] = useState(true);
 
-  useEffect(() => {
-    setInterval(() => {
-      setCounterVisible((counterVisible) => !counterVisible);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setCounterVisible((counterVisible) => !counterVisible);
+  //   }, 3000);
+  // }, []);
 
   // THIS CODE IS NEVER UNMOUNTING THE COUNTER COMPONENT IT ONLY CHANGE ITS {{VISIBILITY}}
   return (
@@ -28,8 +28,13 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   function inc() {
-    setCount((count) => count + 1);
-    // setCount((count) => count + 1);
+    console.log(count);
+    setCount(count + 1);
+
+    setCount(count + 1);
+
+    setCount(count + 1);
+    console.log(count);
   }
 
   function dec() {
@@ -40,18 +45,18 @@ function Counter() {
     setCount(0);
   }
 
-  useEffect(function () {
-    console.log("Upon Mounting - inside useEffect()");
+  // useEffect(function () {
+  //   console.log("Upon Mounting - inside useEffect()");
 
-    const onUNMOUNTING = setInterval(() => {
-      setCount((count) => count + 1);
-      console.log("inside setInterval");
-    }, 1000);
+  //   const onUNMOUNTING = setInterval(() => {
+  //     setCount((count) => count + 1);
+  //     console.log("inside setInterval");
+  //   }, 1000);
 
-    return function () {
-      clearInterval(onUNMOUNTING); //upon UNmounting THIS RUNS/// THE {{CONDITIONAL RENDER}} IS RESPONSIBLE FOR {{UNMOUNTING}} THE {{Counter}} COMPONENT
-    };
-  }, []);
+  //   return function () {
+  //     clearInterval(onUNMOUNTING); //upon UNmounting THIS RUNS/// THE {{CONDITIONAL RENDER}} IS RESPONSIBLE FOR {{UNMOUNTING}} THE {{Counter}} COMPONENT
+  //   };
+  // }, []);
 
   console.log("Counter Component");
 

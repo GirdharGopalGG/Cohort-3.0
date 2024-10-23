@@ -29,7 +29,18 @@ function App() {
   );
 }
 
-function PostComponent(name, followerCount, time, image, desc) {
+
+function ToggleMessage(){
+  return <div>
+    <button onClick={function(){
+      
+    }}>Toggle</button>
+  </div>
+}
+
+
+
+function PostComponent() {
   return (
     <div
       style={{
