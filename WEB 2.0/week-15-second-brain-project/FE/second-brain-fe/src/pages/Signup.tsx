@@ -5,6 +5,8 @@ import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
 
 export function Signup() {
+const beUrl = import.meta.env.VITE_BE_URL as string
+
   const navigate = useNavigate()
   const [isDisabled, setIsDisabled] = useState(false)
   const [error,setError] = useState('')
@@ -21,7 +23,7 @@ export function Signup() {
     const password = passwordRef.current?.value
     
     try {
-       const response = await axios.post("http://localhost:3000/signup", {
+       const response = await axios.post(`${beUrl}signup`, {
         username: username,
         password: password,
       })

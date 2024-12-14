@@ -15,9 +15,12 @@ enum contentType {
 }
 
 export function AddContentModal({open,onClose}:{
+    
     open:boolean,
     onClose:()=>void
 }){
+const beUrl = import.meta.env.VITE_BE_URL as string
+
 
     const linkRef = useRef<HTMLInputElement>()
     const titleRef = useRef<HTMLInputElement>()
@@ -27,7 +30,7 @@ export function AddContentModal({open,onClose}:{
     const title = titleRef.current?.value
     const link = linkRef.current?.value
     
-    await axios.post('http://localhost:3000/content',
+    await axios.post(`${beUrl}content`,
         {
             title,link,type
         },{

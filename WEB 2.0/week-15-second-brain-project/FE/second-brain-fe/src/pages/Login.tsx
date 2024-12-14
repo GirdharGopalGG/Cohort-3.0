@@ -14,11 +14,14 @@ const navigate = useNavigate()
 
     async function signin(){
 
+const beUrl = import.meta.env.VITE_BE_URL as string
+
+
         try{
         const username = usernameRef.current?.value
         const password = passwordRef.current?.value
 
-        const response = await axios.post("http://localhost:3000/signin", {
+        const response = await axios.post(`${beUrl}signin`, {
 
         username,
         password
