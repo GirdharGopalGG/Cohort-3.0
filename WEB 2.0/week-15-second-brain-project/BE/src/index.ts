@@ -143,7 +143,7 @@ app.post('/share',authMiddleware,async (req,res)=>{
             userId:req.id
         })
         res.json({
-            link:'/share/'+hash
+            link:'share/'+hash
         })
         return
         }catch(e){
