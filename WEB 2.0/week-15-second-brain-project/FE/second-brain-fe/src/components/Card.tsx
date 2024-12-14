@@ -11,7 +11,7 @@ interface card{
     type?:"youtube"|"twitter"|"article"|"image",
     title?:string,
     link?:string,
-    id: string
+    id?: string
 }
 
 export function Card(props:card){

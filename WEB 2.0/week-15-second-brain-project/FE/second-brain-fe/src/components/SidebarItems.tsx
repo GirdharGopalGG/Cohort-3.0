@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 
-export function SidebarItems({icon,text,onClick}:{
+export function SidebarItems({icon,text}:{
     text:string,
     icon:ReactElement,
     onClick?:()=>void

@@ -27,14 +27,14 @@ const navigate = useNavigate()
         // console.log(response)
         const jwt  = response.data.token
 
-        // if(!jwt){
-        //     throw new Error('Login failed')
-        // }
+        if(!jwt){
+            throw new Error('Login failed')
+        }
 
         localStorage.setItem('token',jwt)
         navigate("/")
         }
-        catch(e){
+        catch(e:any){
             alert(e.response?.data?.msg || 'Login error')
         }   
 

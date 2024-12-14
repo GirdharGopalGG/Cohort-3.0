@@ -14,7 +14,10 @@ enum contentType {
 
 }
 
-export function AddContentModal({open,onClose}){
+export function AddContentModal({open,onClose}:{
+    open:boolean,
+    onClose:()=>void
+}){
 
     const linkRef = useRef<HTMLInputElement>()
     const titleRef = useRef<HTMLInputElement>()
