@@ -16,16 +16,30 @@ exports.authMiddleware = authMiddleware;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function authMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const token = req.headers.token;
-        const decodedData = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-        if (decodedData) {
-            //@ts-ignore
-            req.id = decodedData.id;
-            next();
+        try {
+            const token = req.headers.token;
+            if (!token) {
+                res.status(401).json({
+                    msg: 'Token missing'
+                });
+                return;
+            }
+            const decodedData = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+            if (decodedData) {
+                //@ts-ignore
+                req.id = decodedData.id;
+                next();
+            }
+            else {
+                res.status(401).json({
+                    msg: 'you are not logged in'
+                });
+                return;
+            }
         }
-        else {
-            res.status(403).json({
-                msg: 'you are not logged in'
+        catch (e) {
+            res.status(500).json({
+                msg: "Internal server error"
             });
         }
     });

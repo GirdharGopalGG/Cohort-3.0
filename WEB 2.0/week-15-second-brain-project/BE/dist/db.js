@@ -14,16 +14,17 @@ const tagsSchema = new mongoose_1.default.Schema({
     tags: { type: String, required: true, unique: true }
 });
 exports.tagsModel = mongoose_1.default.model('tags', tagsSchema);
+const contentTypes = ['image', 'youtube', 'twitter', 'article'];
 const contentSchema = new mongoose_1.default.Schema({
     link: String,
-    type: String,
+    type: { type: String, enum: contentTypes },
     title: String,
     tags: [{ type: mongoose_1.default.Schema.ObjectId, ref: exports.tagsModel }],
     userId: { type: mongoose_1.default.Schema.ObjectId, ref: exports.userModel }
 });
 exports.contentModel = mongoose_1.default.model('content', contentSchema);
 const linkSchema = new mongoose_1.default.Schema({
-    hash: String,
-    userId: { type: mongoose_1.default.Schema.ObjectId, ref: exports.userModel }
+    hash: { type: String },
+    userId: { type: mongoose_1.default.Schema.ObjectId, ref: exports.userModel, unique: true },
 });
 exports.linkModel = mongoose_1.default.model('link', linkSchema);

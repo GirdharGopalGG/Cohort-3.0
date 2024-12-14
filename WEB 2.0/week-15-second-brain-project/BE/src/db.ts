@@ -12,9 +12,11 @@ const tagsSchema = new mongoose.Schema({
 })
 export const tagsModel = mongoose.model('tags',tagsSchema)
 
+const contentTypes = ['image','youtube','twitter','article']
+
 const contentSchema = new mongoose.Schema({
     link:String,
-    type:String,
+    type:{type:String, enum:contentTypes},
     title:String,
     tags:[{type:mongoose.Schema.ObjectId,ref:tagsModel}],
     userId:{type:mongoose.Schema.ObjectId,ref:userModel}
@@ -23,8 +25,9 @@ const contentSchema = new mongoose.Schema({
 export const contentModel = mongoose.model('content',contentSchema)
 
 const linkSchema = new mongoose.Schema({
-    hash:String,
-    userId:{type:mongoose.Schema.ObjectId,ref:userModel}
+    hash:{type:String},
+    userId:{type:mongoose.Schema.ObjectId,ref:userModel,unique:true},
+    
 })
 
 export const linkModel = mongoose.model('link',linkSchema)
