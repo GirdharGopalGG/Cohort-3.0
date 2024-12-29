@@ -76,7 +76,7 @@ app.post('/content',authMiddleware,async(req,res)=>{
     
     await contentModel.create({
         link,type,title,
-        //@ts-ignore
+        //@ts-ignore 
         userId:req.id,
         tags:[]
 
